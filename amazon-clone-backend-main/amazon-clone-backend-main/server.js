@@ -18,13 +18,22 @@ app.use(cors())
 
 // connection url
 
-const connection_url =
-"mongodb+srv://abhijeetbasfore:abhijeet123@cluster0.k5leesh.mongodb.net/?retryWrites=true&w=majority";
+// const connection_url =
+// "mongodb+srv://abhijeetbasfore:abhijeet123@cluster0.k5leesh.mongodb.net/?retryWrites=true&w=majority";
+
+// const connection_url = "mongodb://localhost:27017/ecommerce_web_app";
+const connection_url = process.env.MONGO_URL || "mongodb://localhost:27017/ecommerce_web_app";
+
 
 mongoose.connect(connection_url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).then(() => {
+  console.log(`MongoDB connected`);
+})
+  .catch((e) => {
+    console.log(`Error in connecting to MongoDB: ${e}`);
+  });
 // API
 
 app.get("/", (req, res) => res.status(200).send("Home Page"));
