@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
+const { connectDB, disconnectDB } = require("./configs/db");
 const bcrypt = require("bcryptjs");
 const Products = require("./Products");
 const Users = require("./Users");
@@ -23,17 +23,7 @@ app.use(cors())
 
 // const connection_url = "mongodb://localhost:27017/ecommerce_web_app";
 const connection_url = process.env.MONGO_URL || "mongodb://localhost:27017/ecommerce_web_app";
-
-
-mongoose.connect(connection_url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log(`MongoDB connected`);
-})
-  .catch((e) => {
-    console.log(`Error in connecting to MongoDB: ${e}`);
-  });
+connectDB(connection_url);
 // API
 
 app.get("/", (req, res) => res.status(200).send("Home Page"));
@@ -86,7 +76,7 @@ app.post("/auth/signup", async (req, res) => {
       if (err) {
         res.status(500).send({ message: err.message });
       } else {
-        res.send({ message: "User Created Succesfully" });
+        res.send({ message: "User Created Successfully" });
       }
     });
   }
@@ -144,8 +134,10 @@ app.post("/orders/add", (req, res) => {
   Orders.create(orderDetail, (err, result) => {
     if (err) {
       console.log(err);
+      res.status(500).send({message: err.message});
     } else {
       console.log("order added to database >> ", result);
+      res.status(201).send({message : "order created"});
     }
   });
 });
@@ -163,4 +155,8 @@ app.post("/orders/get", (req, res) => {
   });
 });
 
-app.listen(port, () => console.log("listening on the port", port));
+if (process.env.NODE_ENV !== "test") {
+  app.listen(port, () => console.log(`Listening on port ${port}`));
+}
+
+module.exports = app;
