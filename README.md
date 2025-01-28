@@ -1,3 +1,10 @@
+# Project Video Reference
+
+
+https://github.com/user-attachments/assets/31ccdefb-4491-40d1-91a0-2a8ca6bdf0a4
+
+
+
 # 🛒 Full Stack eCommerce Web Application                           
 A modern and scalable eCommerce web application where users can browse products, add them to their cart, and place orders. Built with the MERN stack and enhanced with Kafka for scalability and Docker for flexible deployments.
 
