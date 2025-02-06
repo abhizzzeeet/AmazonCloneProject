@@ -1,21 +1,23 @@
-import axios from "../axios";
+import axios, { inventoryService } from "../axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 function AddProduct() {
   const [title, setTitle] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [price, setPrice] = useState(0);
+  const [noOfItems, setNoOfItems] = useState(0);
   const [rating, setRating] = useState(0);
 
   const addProduct = (e) => {
     e.preventDefault();
 
-    axios
-      .post("/products/add", { title, imageURL, price, rating })
+    inventoryService
+      .post("/products/add", { title, imageURL, price, noOfItems ,rating })
       .then(() => {
         setTitle("");
         setImageURL("");
         setPrice(0);
+        setNoOfItems(0);
         setRating(0);
       })
       .catch((error) => alert(error.message));
@@ -51,6 +53,14 @@ function AddProduct() {
             type="number"
             onChange={(e) => setPrice(e.target.value)}
             value={price}
+          />
+        </InputContainer>
+        <InputContainer>
+          <p>Number of Items</p>
+          <input
+            type="number"
+            onChange={(e) => setNoOfItems(e.target.value)}
+            value={noOfItems}
           />
         </InputContainer>
         <InputContainer>

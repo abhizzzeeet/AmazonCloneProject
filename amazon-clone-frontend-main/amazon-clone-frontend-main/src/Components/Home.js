@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios, { inventoryService } from "../axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
@@ -10,7 +10,7 @@ function Home() {
   
   useEffect(() => {
     const fetchdata = async () => {
-      const data = await axios.get("/products/get");
+      const data = await inventoryService.get("/products/get");
       setProducts(data);
     };
     fetchdata();

@@ -7,7 +7,13 @@ A modern and scalable eCommerce web application where users can browse products,
 
 Frontend: Built using ReactJS for a dynamic and responsive user interface.
 
-Backend: Developed with NodeJS and ExpressJS to handle business logic and API endpoints.
+Backend: 
+
+    Developed with NodeJS and ExpressJS to handle business logic and API endpoints.
+
+    Built in microserices archotectur containing 3 micro services :
+
+    users-service, inventory-service, orders-service
 
 Testing: All API endpoints are tested using Jest to ensure robustness and reliability.
 
@@ -68,26 +74,35 @@ node server.js
 
 Access the Backend
 
-The backend application will be accessible at: http://localhost:8000.
+Backend Services will be accessible at urls : 
+
+users-service : `http://localhost:8001`
+
+inventory-service : `http://localhost:8002`
+
+orders-service : `http://localhost:8003`
 
 ## 🛠️ Testing Backend APIs
+
 Run the following command inside the backend directory to test the API endpoints:
 
 npm test  
 
 ## 🐳 Docker Instructions
 
-Build and Run Docker Containers
+Navigate to the backend project directory  amazon-clone-backend-main\amazon-clone-backend-main   
 
-Navigate to the root project directory.
+Use the following command to build and run the backend Docker containers:
 
-Use the following command to build and run the Docker containers:
+`docker-compose up --build`  
 
-docker-compose up --build  
+Backend Services will be accessible at urls : 
 
-Access the Application
+users-service : `http://localhost:8001`
 
-The application will be accessible at: http://localhost:3000.
+inventory-service : `http://localhost:8002`
+
+orders-service : `http://localhost:8003`
 
 ## 🌟 Why This Project Stands Out
 

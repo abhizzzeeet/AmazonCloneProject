@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios, { ordersService } from "../axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Navbar from "./Navbar";
@@ -8,7 +8,7 @@ function Orders() {
   const [{ user }] = useStateValue();
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    axios
+    ordersService
       .post("/orders/get", { email: user.email })
       .then((res) => setOrders(res.data));
   }, []);

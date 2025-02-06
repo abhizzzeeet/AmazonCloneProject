@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "../axios";
+import axios, { usersService } from "../axios";
 import { useStateValue } from "../StateProvider";
 function Login() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ function Login() {
   const login = (e) => {
     e.preventDefault();
 
-    axios
+    usersService
       .post("/auth/login", { email, password })
       .then((res) => {
         if (!res.data.error) {

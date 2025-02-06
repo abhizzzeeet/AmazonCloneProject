@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "../axios";
+import axios, { usersService } from "../axios";
 function SignUp() {
   const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ function SignUp() {
 
   const signup = (e) => {
     e.preventDefault();
-    axios
+    usersService
       .post("/auth/signup", { email, password, fullName })
       .then((res) => alert(res.data.message))
       .catch((err) => console.warn(err));

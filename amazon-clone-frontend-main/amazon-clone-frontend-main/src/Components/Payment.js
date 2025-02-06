@@ -6,7 +6,7 @@ import { useStateValue } from "../StateProvider";
 import Address from "./Address";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import Navbar from "./Navbar";
-import axios from "../axios";
+import axios, { ordersService } from "../axios";
 import { useNavigate } from "react-router-dom";
 
 function Payment() {
@@ -18,7 +18,7 @@ function Payment() {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchClientSecret = async () => {
-      const data = await axios.post("/payment/create", {
+      const data = await ordersService.post("/payment/create", {
         amount: getBasketTotal(basket),
       });
 
@@ -39,7 +39,7 @@ function Payment() {
         },
       })
       .then((result) => {
-        axios.post("/orders/add", {
+        ordersService.post("/orders/add", {
           basket: basket,
           price: getBasketTotal(basket),
           email: user?.email,
